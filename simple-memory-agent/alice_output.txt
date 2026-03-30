@@ -1,0 +1,60 @@
+=== Alice Session 1 ===
+
+User: Hi, I'm Alice. I'm a software engineer.
+Agent: Great! I've got that down. Is there anything I can help you with today?
+
+User: I prefer Python for development.
+Agent: Thanks for sharing! Python is a great choice—it's versatile and widely used across web development, data science, automation, and many other fields. Do you have any particular area or project you're working on with Python?
+
+User: What programming languages do I like?
+Agent: Based on what you've shared with me so far, I know that you **prefer Python** for development. That's the only programming language preference you've mentioned to me. If there are other languages you enjoy working with, feel free to let me know and I'll remember those too!
+
+User: I'm working on a FastAPI project.
+Agent: FastAPI is perfect for someone who prefers Python—it's fast, intuitive, and great for building APIs quickly with automatic documentation. Is there anything specific about your FastAPI project you'd like help with? Whether it's architecture advice, troubleshooting, or best practices, I'm happy to help!
+
+User: What have we discussed so far?
+Agent: Here's a summary of what we've discussed so far:
+
+1. **About you**: You're a software engineer named Alice
+2. **Your programming preference**: You prefer Python for development
+3. **Your current project**: You're working on a FastAPI project
+
+That's the main information we've covered in our conversation. Is there anything else you'd like to tell me or discuss?
+
+
+=== Alice Session 2 (New Session) ===
+
+User: What do you remember about me?
+Agent: I don't have any stored memories about you yet from our conversations. This appears to be the beginning of our interaction, so I don't have information about your preferences, background, name, or any previous discussions we've had.
+
+However, I'm happy to learn more about you! Feel free to share:
+- Your name or how you'd like to be called
+- Your interests or hobbies
+- Any ongoing projects you're working on
+- Your preferences for how I can best help you
+- Anything else you'd like me to remember
+
+As we chat, I'll use my memory tools to store important information about you so I can provide better, more personalized assistance in future conversations.
+
+User: What project am I working on?
+Agent: I don't have any memories of projects you're working on. This is the first time we've discussed your work or projects in our conversation history.
+
+If you'd like to tell me about a project you're working on, I'd be happy to help! Feel free to share the details, and I can store that information so I remember it for our future conversations.
+
+=== Alice Session 2 (New Session) ===
+
+User: What do you remember about me?
+Agent: Based on my memory, here's what I know about you:
+
+1. **Your name is Alice**
+2. **You're a software engineer**
+3. **You prefer Python for development**
+4. **You're working on a FastAPI project**
+
+Is there anything else you'd like me to know about you, or would you like to update any of this information?
+
+User: What project am I working on?
+Agent: Based on my memory, you're working on a **FastAPI project**. 
+
+That's what I have stored so far. If you'd like to tell me more details about this project—what it does, what stage you're at, any challenges you're facing, or other aspects of it—I'd be happy to help and remember those details for future conversations!
+

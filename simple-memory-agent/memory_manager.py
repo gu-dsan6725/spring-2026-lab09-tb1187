@@ -290,31 +290,41 @@ class MemoryManager:
             # Mem0 stores memories under run_id, so we need to query all runs
             try:
                 users_data = self.memory.users()
-                # Filter for runs (type='run') that belong to this user
-                # Runs are typically named like: user_id-session-N
-                user_runs = [u['name'] for u in users_data.get('results', [])
-                           if u.get('type') == 'run' and u['name'].startswith(user_id + '-')]
+                # Handle both dict and Pydantic model responses from Mem0 client
+                if isinstance(users_data, dict):
+                    results_list = users_data.get('results', [])
+                else:
+                    results_list = getattr(users_data, 'results', [])
+
+                user_runs = []
+                for u in results_list:
+                    if isinstance(u, dict):
+                        u_type = u.get('type')
+                        u_name = u.get('name', '')
+                    else:
+                        u_type = getattr(u, 'type', None)
+                        u_name = getattr(u, 'name', '')
+                    if u_type == 'run' and u_name.startswith(user_id + '-'):
+                        user_runs.append(u_name)
+
                 logger.debug(f"Found {len(user_runs)} runs for user={user_id}: {user_runs}")
             except Exception as e:
                 logger.warning(f"Could not get user runs, falling back to user_id filter: {e}")
                 user_runs = None
 
-            # Build filters for Mem0 cloud platform
-            # Use OR logic across all user's run_ids for cross-session recall
-            if user_runs and len(user_runs) > 0:
+            # Build filters for Mem0 v2 API.
+            # v2 requires BOTH user_id AND run_id together; user_id alone returns nothing.
+            # For cross-session recall, OR across all known runs for this user.
+            if user_runs:
                 filters = {
-                    'OR': [{'run_id': run} for run in user_runs]
+                    "OR": [
+                        {"AND": [{"user_id": user_id}, {"run_id": run}]}
+                        for run in user_runs
+                    ]
                 }
             else:
-                # Fallback to user_id filter (may not work with current Mem0 API)
-                filters = {"user_id": user_id}
-
-            if agent_id and not user_runs:
-                filters["agent_id"] = agent_id
-
-            # Combine with any additional metadata filters
-            if metadata_filters and not user_runs:
-                filters.update(metadata_filters)
+                # No runs found — search current session only as fallback
+                filters = {"AND": [{"user_id": user_id}, {"run_id": run_id}]}
 
             # Search using Mem0 cloud platform with filters
             results = self.memory.search(
